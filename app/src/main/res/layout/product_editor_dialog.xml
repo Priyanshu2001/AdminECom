@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup">
@@ -112,24 +112,26 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             app:boxStrokeColor="@color/base"
-            app:hintTextColor="@color/base"
-            android:layout_weight="1">
+            app:hintTextColor="@color/base">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/PricePerKG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="Price per kg" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             app:boxStrokeColor="@color/base"
-            app:hintTextColor="@color/base"
-            android:layout_weight="1">
+            app:hintTextColor="@color/base">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/MinQTY"

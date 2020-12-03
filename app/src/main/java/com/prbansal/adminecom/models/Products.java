@@ -18,7 +18,6 @@ public class Products implements Serializable {
 
     // list of variants
     public List<Variants> variantsList;
-    public int count =0;
 
     // Default Constructor
     public Products(){
@@ -71,9 +70,8 @@ public class Products implements Serializable {
 
  public void ExtractVariantsAndSet(String[] name, String[] price) {
         variantsList = new ArrayList<>();
-     for (String s : name) {
-         variantsList.add(new Variants(s,price[count],count+1));
-         this.count++;
+     for (int i=0 ; i<name.length; i++) {
+         variantsList.add(new Variants(name[i],Integer.parseInt(price[i])));
      }
  }
 

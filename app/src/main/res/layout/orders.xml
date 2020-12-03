@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnGrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="declineBtn,deliverBtn"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/OrderTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="order id"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/base2"
+        app:layout_constraintEnd_toStartOf="@+id/deliverBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/moreBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="See More"
+        android:textColor="@color/teal_200"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/deliverBtn"
+        app:layout_constraintStart_toStartOf="@+id/basic"
+        app:layout_constraintTop_toBottomOf="@+id/basic" />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/OrderTxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/OrderTxt"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTxt" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/declineBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/decline"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_decline" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deliverBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/accept"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/declineBtn"
+        app:layout_constraintEnd_toStartOf="@+id/declineBtn"
+        app:layout_constraintTop_toTopOf="@+id/declineBtn"
+        app:srcCompat="@drawable/ic_accept" />
+
+    <TextView
+        android:id="@+id/StatusTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status : decline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/purple_500"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/OrderTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/OrderTxt" />
+
+    <TextView
+        android:id="@+id/basic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/deliverBtn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/OrderTxt"
+        app:layout_constraintTop_toBottomOf="@+id/details" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="base">#FABD06</color>
     <color name="base2">#FF9800</color>
+    <color name="accept">#08BD10</color>
+    <color name="decline">#DD0909</color>
 </resources>

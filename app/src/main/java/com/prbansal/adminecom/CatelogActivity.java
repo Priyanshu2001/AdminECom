@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.prbansal.adminecom.adapters.ProductAdapter;
@@ -66,6 +68,14 @@ public class CatelogActivity extends AppCompatActivity {
 
         app =  (MyApp) getApplicationContext();
         loadPreviousData();
+
+        FirebaseMessaging.getInstance().subscribeToTopic("admin");
+        activityCatelogBinding.manageOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              startActivity(new Intent(CatelogActivity.this,ManageOrdersActivity.class));
+            }
+        });
 
     }
 

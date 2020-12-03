@@ -3,15 +3,17 @@ package com.prbansal.adminecom.models;
 public class Variants {
 
     public String name;
-    public String price;
-    public int VariantCount;
+    public int price;
+    private int VariantCount;
 
-    public Variants(String name, String price,int variantCount) {
+    public Variants(String name, int price) {
         this.name = name;
         this.price = price;
-        this.VariantCount= variantCount;
+        this.VariantCount++;
     }
 
+    public Variants() {
+    }
 
     @Override
     public String toString() {
