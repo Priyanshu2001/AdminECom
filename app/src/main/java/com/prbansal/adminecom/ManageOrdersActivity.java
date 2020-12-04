@@ -17,6 +17,7 @@ import com.prbansal.adminecom.adapters.OrderAdapter;
 import com.prbansal.adminecom.databinding.ActivityManageOrdersBinding;
 import com.prbansal.adminecom.fcm.FCMSender;
 import com.prbansal.adminecom.fcm.MessageFormatter;
+import com.prbansal.adminecom.models.Orders;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +33,10 @@ public class ManageOrdersActivity extends AppCompatActivity {
 
     private ActivityManageOrdersBinding manageOrdersBinding;
     public MyApp app;
-    ArrayList<QueryDocumentSnapshot> orders = new ArrayList<>();
+/*    ArrayList<QueryDocumentSnapshot> orders = new ArrayList<>();*/
     OrderAdapter orderAdapter;
+    ArrayList<String> orderIDs=new ArrayList<>();
+    Orders orders;
 
 
     @Override
@@ -52,7 +55,8 @@ public class ManageOrdersActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot document: queryDocumentSnapshots){
-                            orders.add(document);
+                            orders = document.toObject(Orders.class);
+                            orderIDs.add(document.getId());
                         }
                         app.showToast(ManageOrdersActivity.this,"Success");
                        setOrderAdapter();
@@ -67,65 +71,11 @@ public class ManageOrdersActivity extends AppCompatActivity {
     }
 
     private void setOrderAdapter() {
-        orderAdapter= new OrderAdapter(this,orders);
+        orderAdapter= new OrderAdapter(this,orders,app,orderIDs);
         manageOrdersBinding.reclyerViiew.setAdapter(orderAdapter);
         manageOrdersBinding.reclyerViiew.setLayoutManager(new LinearLayoutManager(this));
         manageOrdersBinding.reclyerViiew.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
     }
-    public void sendNotification(String orderId,String msg,Integer status) {
-        updateStatus(orderId,status);
-        String message = MessageFormatter
-                .getSampleMessage("users", "Order Id="+ orderId,orderId,msg);
-
-
-        new FCMSender()
-                .send(message
-                        , new Callback() {
-                            @Override
-                            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        new AlertDialog.Builder(ManageOrdersActivity.this)
-                                                .setTitle("Failure")
-                                                .setMessage(e.toString())
-                                                .show();
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-/*                                        new AlertDialog.Builder(ManageOrdersActivity.this)
-                                                .setTitle("Success")
-                                                .setMessage(response.toString())
-                                                .show();*/
-                                    }
-                                });
-
-
-                            }
-                        });
-    }
-
-    private void updateStatus(String orderId,Integer status) {
-        app.db.collection("orders").document(orderId).update("status",status)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        app.showToast(ManageOrdersActivity.this,"Updated");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        app.showToast(ManageOrdersActivity.this,"failed");
-                    }
-                });
-    }
-}
+   }

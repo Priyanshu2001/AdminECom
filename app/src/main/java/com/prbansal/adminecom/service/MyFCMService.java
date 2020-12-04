@@ -20,20 +20,14 @@ public class MyFCMService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-/*
-        String version = remoteMessage.getData()
-                .get("version");
 
-
-        Log.e("fcm", "version - " + version);
-        Log.e("fcm", "notifTitle - " + remoteMessage.getNotification().getTitle());
-        Log.e("fcm", "notifBody - " + remoteMessage.getNotification().getBody());*/
 
         createNotificationChannel();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(remoteMessage.getNotification().getTitle())
-                .setContentText(remoteMessage.getNotification().getBody())
+                .setSmallIcon(R.drawable.ic_accept)
+                .setContentTitle(remoteMessage.getData().get("title"))
+                .setContentText(remoteMessage.getData().get("body"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
